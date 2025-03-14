@@ -30,6 +30,10 @@ class Game:
                     self.player.move("backward")
                 if event.key == pygame.K_d:
                     self.player.rotate("right")
+    
+
+    def update_physics(self):
+        self.player.cast_ray(self.map.grid, 64)
 
 
     def update_display(self):

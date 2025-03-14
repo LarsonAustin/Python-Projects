@@ -18,7 +18,7 @@ map = Map([
 ])
 
 player = Player(
-    pygame.Vector2(256+8, 256+8)
+    pygame.Vector2(128+8, 256+8)
 )
 
 def main():
@@ -26,6 +26,8 @@ def main():
 
     while game.running:
         game.handle_events()
+
+        game.update_physics()
 
         game.update_display()
 
