@@ -3,7 +3,7 @@ from level import Map
 from player import Player
 from colors import *
 
-MOVE_SPEED = 16
+
 
 class Game:
     def __init__(self, width, height, map: Map, player: Player, max_framerate=30):
@@ -23,13 +23,13 @@ class Game:
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    self.player.move(pygame.Vector2(0, -1) * MOVE_SPEED)
+                    self.player.move("forward")
                 if event.key == pygame.K_a:
-                    self.player.move(pygame.Vector2(-1, 0) * MOVE_SPEED)
+                    self.player.rotate("left")
                 if event.key == pygame.K_s:
-                    self.player.move(pygame.Vector2(0, 1) * MOVE_SPEED)
+                    self.player.move("backward")
                 if event.key == pygame.K_d:
-                    self.player.move(pygame.Vector2(1, 0) * MOVE_SPEED)
+                    self.player.rotate("right")
 
 
     def update_display(self):
