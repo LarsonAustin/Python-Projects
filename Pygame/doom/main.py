@@ -1,20 +1,33 @@
-from renderer import RenderWindow
-from buffer import PixelBuffer
+import pygame
+from game import Game
+from level import Map
+from player import Player
 
 
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 1024, 512
 
+map = Map([
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+])
+
+player = Player(
+    pygame.Vector2(256+8, 256+8)
+)
 
 def main():
-    window = RenderWindow((WIDTH, HEIGHT), 30)
+    game = Game(WIDTH, HEIGHT, map, player)
 
-    buffer = PixelBuffer((WIDTH, HEIGHT))
+    while game.running:
+        game.handle_events()
 
-    while window.running:
-        window.process_events()
-
-        buffer.randomize()
-        window.render_from_buffer(buffer.array)
+        game.update_display()
 
 
 if __name__ == "__main__":
