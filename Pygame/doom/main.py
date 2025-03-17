@@ -1,35 +1,23 @@
 import pygame
-from game import Game
-from level import Map
-from player import Player
+from pygame import Vector2
+
+from camera import Camera
+from game import default_game
 
 
-WIDTH, HEIGHT = 1024, 512
+game = default_game
 
-map = Map([
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1],
-])
+c = Camera(Vector2(0, 0), Vector2(2, 2), Vector2(0, 512), Vector2(512, 0))
 
-player = Player(
-    pygame.Vector2(128+8, 256+8)
-)
+print(c.to_screen(Vector2(0.5, 1.75)))
 
 def main():
-    game = Game(WIDTH, HEIGHT, map, player)
-
     while game.running:
         game.handle_events()
 
         game.update_physics()
 
-        game.update_display()
+        game.update_graphics()
 
 
 if __name__ == "__main__":

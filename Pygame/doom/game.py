@@ -1,21 +1,15 @@
 import pygame
-from level import Map
-from player import Player
-from colors import *
-
+import colors
 
 
 class Game:
-    def __init__(self, width, height, map: Map, player: Player, max_framerate=30):
-        self.window = pygame.display.set_mode((width, height))
+    def __init__(self, window_size, max_framerate):
+        self.window = pygame.display.set_mode(window_size)
         self.max_framerate = max_framerate
-        self.map = map
-        self.player = player
 
-        self.running = True
         self.clock = pygame.time.Clock()
-
-
+        self.running = True
+    
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -23,29 +17,28 @@ class Game:
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    self.player.move("forward")
+                    print("forward pressed\n") # forward
                 if event.key == pygame.K_a:
-                    self.player.rotate("left")
+                    print("left pressed\n") # left
                 if event.key == pygame.K_s:
-                    self.player.move("backward")
+                    print("back pressed\n") # back
                 if event.key == pygame.K_d:
-                    self.player.rotate("right")
+                    print("right pressed\n") # right
     
-
     def update_physics(self):
-        self.player.cast_ray(self.map.grid, 64)
+        pass
 
-
-    def update_display(self):
-        self.window.fill(DARK_GRAY)
-
-        self.map.draw(
-            self.window,
-            64,
-            (0, 0)
-        )
-
-        self.player.draw(self.window)
+    def update_graphics(self):
+        self.window.fill(colors.DARK_GREY)
 
         pygame.display.update()
         self.clock.tick(self.max_framerate)
+
+
+
+
+
+WIDTH, HEIGHT = 1024, 512
+MAX_FRAMERATE = 30
+
+default_game = Game((WIDTH, HEIGHT), MAX_FRAMERATE)
