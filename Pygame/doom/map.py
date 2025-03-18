@@ -3,11 +3,14 @@ import pygame
 import colors
 
 SCALE = 64
-MARGIN = 2
+MARGIN = 1
 
 class Map:
     def __init__(self, grid):
         self.grid = grid
+
+    def at(self, x, y):
+        return self.grid[-(y + 1)][x]
 
     def draw(self, surface: pygame.Surface, origin: pygame.Vector2):
         for x in range(len(self.grid)):
@@ -21,6 +24,6 @@ class Map:
                     colors.WHITE if self.grid[x][y] else colors.BLACK,
                     pygame.Rect(
                         position,
-                        pygame.Vector2(SCALE - (MARGIN), SCALE - (MARGIN))
+                        pygame.Vector2(SCALE - (MARGIN * 2), SCALE - (MARGIN * 2))
                     )
                 )
