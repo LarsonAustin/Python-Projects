@@ -1,11 +1,13 @@
 import pygame
 import colors
+from map import Map
 
 
 class Game:
-    def __init__(self, window_size, max_framerate):
+    def __init__(self, window_size, max_framerate, map: Map):
         self.window = pygame.display.set_mode(window_size)
         self.max_framerate = max_framerate
+        self.map = map
 
         self.clock = pygame.time.Clock()
         self.running = True
@@ -31,6 +33,8 @@ class Game:
     def update_graphics(self):
         self.window.fill(colors.DARK_GREY)
 
+        self.map.draw(self.window, pygame.Vector2(0, 0))
+
         pygame.display.update()
         self.clock.tick(self.max_framerate)
 
@@ -40,5 +44,15 @@ class Game:
 
 WIDTH, HEIGHT = 1024, 512
 MAX_FRAMERATE = 30
+MAP = Map([
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1]
+])
 
-default_game = Game((WIDTH, HEIGHT), MAX_FRAMERATE)
+default_game = Game((WIDTH, HEIGHT), MAX_FRAMERATE, MAP)
