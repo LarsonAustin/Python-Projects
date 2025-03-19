@@ -22,15 +22,16 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
             
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    print("forward pressed\n") # forward
-                if event.key == pygame.K_a:
-                    print("left pressed\n") # left
-                if event.key == pygame.K_s:
-                    print("back pressed\n") # back
-                if event.key == pygame.K_d:
-                    print("right pressed\n") # right
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_w]:
+            self.player.move("forward") # forward
+        if pressed[pygame.K_a]:
+            self.player.turn("left") # left
+        if pressed[pygame.K_s]:
+            self.player.move("back") # back
+        if pressed[pygame.K_d]:
+            self.player.turn("right") # right
+            
     
     def update_physics(self):
         pass
