@@ -31,16 +31,16 @@ class Game:
             self.player.move("back") # back
         if pressed[pygame.K_d]:
             self.player.turn("right") # right
-            
+
     
     def update_physics(self):
-        pass
+        pass #self.player.cast_ray(self.map)
 
     def update_graphics(self):
         self.window.fill(colors.DARK_GREY)
 
         self.map.draw(self.window, pygame.Vector2(0, 0))
-        self.player.draw(self.window, self.cameras["player"])
+        self.player.draw(self.window, self.cameras["player"], self.map.grid)
 
         pygame.display.update()
         self.clock.tick(self.max_framerate)
